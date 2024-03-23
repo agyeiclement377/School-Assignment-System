@@ -1,0 +1,43 @@
+{%extends "adminpage.html"%}
+
+<title>{%block title%}Delete Assignment{%endblock%}</title>
+<!-- Code to get flashed messages-->
+{%with messages = get_flashed_messages(with_categories=true)%}
+     {% if messages %}
+      {% for category ,message in messages%}
+      {% if category == 'error' %}
+      <div class="alert alert-danger alert-dismissable fade show " role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      {%else%}
+
+      <div class="alert alert-success alert-dismissable fade show " role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {%endif%}
+      {%endfor%}
+      {%endif%}
+
+    {%endwith%}
+{%block content%}
+<form action="/deletenote" method="POST">
+    <div style="padding-top: 20px;"></div>
+    <b style="padding-top: 50px;">Delete Assignment  <span class="glyphicon glyphicon-arrow-down" ></span></b>
+    <input style="font-size: 15px;" type="email" class="username form-control" name="email" placeholder="Email" required="required">
+    <div style="padding-top: 5px;"></div>
+    <input style="font-size: 15px;" type="text" class="username form-control" name="assignmentdata" placeholder="Assignment" required="required">
+    <div style="padding-top: 5px;"></div>
+    <input type="text" class="message form-control" placeholder="Grade" required="required" name="grade">
+    <div style="padding-top: 5px;"></div>
+    
+    <button type="submit" class="btn btn-alert btn-block" style="background-color: red;">Delete Assignment</button>
+</form>
+
+{%endblock%}
