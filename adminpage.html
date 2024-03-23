@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!--<link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"-->
+  
+    
+    <title>{%block title%}Admin Page{%endblock%}</title>
+    
+</head>
+<style>
+    *{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 20px;
+    }
+    nav{
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .home{
+        padding-top: 25px;
+    }
+
+    .auth{
+        display: flex;
+        padding-top: 25px;
+    }
+    a{
+        font-weight: bold;
+        text-decoration: none;
+        font-family: Arial, Helvetica, sans-serif;
+        color: cornsilk;
+    }
+    a:hover{
+        color: red;
+        cursor: pointer;
+    }
+    .intro{
+        border: 3px solid snow;
+        border-radius: 20px;
+        font-size: 20px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        background-color: snow;
+    }
+    .col-sm-3{
+        display: inline-block;
+        text-align: center;
+        padding-top: 100px;
+        padding-left: 150px;
+        
+    }
+    .auth a:hover{
+        color: red;
+    }
+    img{
+        width: 380px;
+        height: 175px;
+        text-align: center;
+    }
+    button :hover{
+        cursor: pointer;
+    }
+     
+    
+</style>
+<body>
+    <header style="background-color: cornflowerblue;">
+    <nav>
+        
+
+        <div class="home">
+            <a href="/">Home</a>
+        </div>
+
+        <h2>ONLINE SCHOOL SYSTEM</h2>
+
+        <div class="auth">
+            <a href=""></a>
+            <a href="/logoutadmin">Logout</a>
+            
+        </div>
+        
+    </nav>
+</header>
+
+<!-- Code to get flashed messages-->
+{%with messages = get_flashed_messages(with_categories=true)%}
+     {% if messages %}
+      {% for category ,message in messages%}
+      {% if category == 'error' %}
+      <div class="alert alert-danger alert-dismissable fade show " role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      {%else%}
+
+      <div class="alert alert-success alert-dismissable fade show " role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {%endif%}
+      {%endfor%}
+      {%endif%}
+
+    {%endwith%}
+<div class="container-fluid" style="display: flex;">
+    {%block content%}
+    <div class="col-sm-8">
+        <div id="nomsg">
+            <h2 style="color: grey;">Assignments Given</h2>
+            <div class="ass-wrapper">
+                <table style="width: 40%;">
+                    <tr>
+                        <th>Assignment</th>
+                        <th>Submission Date</th>
+                    </tr>
+                {%for Assignment in Assignments%}
+                <tr>
+                    <td>{{Assignment.data}}</td>
+                    <td>{{Assignment.submissiondate}}</td>
+                   
+                </tr>
+                {%endfor%}
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4" style="padding-top: 50px;">
+        <form action="/adminpage" method="POST">
+            <b style="padding-top: 50px;">Add Assignment  <span class="glyphicon glyphicon-arrow-down" ></span></b>
+            <input style="font-size: 15px;" type="email" class="username form-control" name="email" placeholder="Email" required="required">
+            <div style="padding-top: 5px;"></div>
+            <input style="font-size: 15px;" type="textarea" class="username form-control" name="data" placeholder="Assignment" required="required">
+            <div style="padding-top: 5px;"></div>
+            <input type="text" class="message form-control" placeholder="Grade" required="required" name="grade">
+            <div style="padding-top: 5px;"></div>
+            <input type="text" class="message form-control" name="submissiondate" placeholder="Submission Date" required="required">
+            <div style="padding-top: 5px;"></div>
+            <button type="submit" class="btn btn-success btn-block">Add Assignment</button>
+        </form>
+        
+        <div class="delete" style="display: grid;">
+            <b style="padding-top: 30px;">Delete Assignment  <span class="glyphicon glyphicon-arrow-down" ></span></b>
+            <button><a href="/deletenote">Delete Assignment</a></button>
+        </div>
+        
+
+        
+
+    </div>
+    
+      
+    {%endblock%}
+</div>
+
+<script type = "text/javascript"src="
+  {{url_for('static' ,filename='index.js')}}"></script>
+</body>
+</html>
+    
