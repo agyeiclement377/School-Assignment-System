@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+
+    <!--<link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"-->
+  />
+    
+    <title>{%block title%}Home{%endblock%}</title>
+    
+</head>
+<style>
+    *{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 15px;
+    }
+    nav{
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .home{
+        padding-top: 25px;
+    }
+
+    .auth{
+        display: flex;
+        padding-top: 25px;
+    }
+    a{
+        font-weight: bold;
+        text-decoration: none;
+        font-family: Arial, Helvetica, sans-serif;
+        color: cornsilk;
+    }
+    a:hover{
+        color: red;
+        cursor: pointer;
+    }
+    .intro{
+        border: 3px solid snow;
+        border-radius: 20px;
+        font-size: 20px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        background-color: snow;
+    }
+    .col-sm-3{
+        display: inline-block;
+        text-align: center;
+        padding-top: 100px;
+        padding-left: 150px;
+        
+    }
+    .auth a:hover{
+        color: red;
+    }
+    img{
+        width: 380px;
+        height: 175px;
+        text-align: center;
+    }
+    button :hover{
+        cursor: pointer;
+    }
+     
+    
+</style>
+<body>
+    <header style="background-color: cornflowerblue;">
+    <nav>
+        
+
+        <div class="home">
+            <a href="/">Home</a>
+        </div>
+
+        <h2>ONLINE SCHOOL SYSTEM</h2>
+
+        <div class="auth">
+            <a href="/loginadmin">Login(Admin)</a><br>
+            <p style="color: cornflowerblue;">Space</p>
+            <a href="/loginstudent">Login(Student)</a>
+            <p style="color: cornflowerblue;">Space</p>
+            <a href="/signup">Sign Up</a>
+        </div>
+        
+    </nav>
+</header>
+
+<!-- Code to get flashed messages-->
+{%with messages = get_flashed_messages(with_categories=true)%}
+     {% if messages %}
+      {% for category ,message in messages%}
+      {% if category == 'error' %}
+      <div class="alert alert-danger alert-dismissable fade show " role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      {%else%}
+
+      <div class="alert alert-success alert-dismissable fade show " role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {%endif%}
+      {%endfor%}
+      {%endif%}
+
+    {%endwith%}
+<div class="container-fluid" style="display: flex;">
+    
+    
+    {%block content%}
+    <div class="col-sm-6" style="padding-top: 100px;">
+        <div class="intro"><p>This is the New Online School System. Students must sign up by
+            entering in their</p> <ul><b>
+                <li>FirstName</li>
+                <li>LastName</li>
+                <li>School UserName</li>
+                <li>Grade</li>
+                <li>Password</li>
+                <li>Email Address</li>
+                </b></ul>. <p>This website will allow students to view
+            their assignments and submission dates as well as their notes</p>
+            </div>
+    </div>
+
+    <div class="col-sm-3" >
+        <a class="auth" href="/signup"><h2 style="color: black;">SIGN UP <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+            <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+          </svg></h2></a>
+        <a class="auth" href="/loginstudent"><h2 style="color: black;">LOGIN(STUDENT) <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+            <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+          </svg></h2></a>
+          <a class="auth" href="/loginadmin"><h2 style="color: black;">LOGIN(ADMIN) <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+            <path d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z"/>
+          </svg></h2></a>
+    </div>
+
+
+    {%endblock%}
+</div>
+    
+
+<script
+src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"
+></script>
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"
+></script>
+<script
+src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"
+></script>
+</body>
+</html>
